@@ -53,3 +53,84 @@ ___
 - Initial PPS = 1.0 (in fixed-point: 1e9)
 
   ___
+
+
+## 🛠️ Program Instructions
+
+### `initialize_vault`
+
+Creates a new vault.
+
+**Parameters:**
+- `authority`: Vault manager's pubkey  
+- `senior_apy_cap_bps`: Senior APY cap in basis points (e.g., `1000 = 10%`)
+
+---
+
+### `deposit_senior`
+
+Deposit funds into the **Senior** tranche.
+
+**Parameters:**
+- `amount_usd_fp`: USD amount in fixed-point (1e9 scale)
+
+**Behavior:**
+- Mints shares based on current Senior PPS  
+- Updates NAV and total shares  
+- Tracks user position via PDA
+
+---
+
+### `deposit_junior`
+
+Deposit funds into the **Junior** tranche.
+
+**Parameters:**
+- `amount_usd_fp`: USD amount in fixed-point
+
+**Behavior:**
+- Same logic as Senior deposit  
+- Junior PPS is calculated independently
+
+---
+
+### `distribute_yield`
+
+Distributes positive yield across both tranches.
+
+**Parameters:**
+- `yield_fp`: Total yield in fixed-point
+
+**Behavior:**
+- Calculates Senior yield cap  
+- Allocates yield using waterfall logic  
+- Emits `YieldDistributed` event
+
+---
+
+### `simulate_loss` *(Authority only)*
+
+Simulates portfolio losses for testing or stress analysis.
+
+**Parameters:**
+- `total_loss_fp`: Loss amount in fixed-point
+
+**Behavior:**
+- Junior absorbs first  
+- Senior absorbs remainder if Junior depleted  
+- Updates NAVs accordingly
+
+---
+
+### `simulate_yield_surplus` *(Authority only)*
+
+Simulates yield generation for testing and dry runs.
+
+**Parameters:**
+- `amount_usd_fp`: Simulated yield in fixed-point
+
+**Behavior:**
+- Follows same logic as `distribute_yield`  
+- Emits `SimulatedYield` event
+
+---
