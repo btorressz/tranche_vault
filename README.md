@@ -134,3 +134,48 @@ Simulates yield generation for testing and dry runs.
 - Emits `SimulatedYield` event
 
 ---
+
+## 🧠 Account Structures
+
+### `TrancheVault` (143 bytes)
+
+Main state account for the vault.
+
+- `authority: Pubkey` — Vault manager
+- `senior_total_deposits: u128`
+- `junior_total_deposits: u128`
+- `senior_shares_supply: u128`
+- `junior_shares_supply: u128`
+- `senior_nav: u128`
+- `junior_nav: u128`
+- `senior_apy_cap_bps: u16`
+- `last_yield_ts: i64`
+- `bump: u8`
+
+---
+
+### `UserPosition` (64 bytes)
+
+User-specific account storing position data.
+
+- `owner: Pubkey` — User wallet
+- `senior_shares: u128`
+- `junior_shares: u128`
+
+---
+
+## 💵 Fixed-Point Math
+
+All USD values use 9-decimal fixed-point representation.
+
+- `FP_SCALE = 1_000_000_000`  
+  Example: $100.00 = `100_000_000_000`
+
+APY caps use **basis points (BPS)** for percentage values.
+
+- `BPS_DENOM = 10_000`  
+  Example: `1000` = 10% APY cap
+
+---
+
+
