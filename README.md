@@ -178,4 +178,34 @@ APY caps use **basis points (BPS)** for percentage values.
 
 ---
 
+## 📢 Events
+
+- **Deposited**: User deposit occurred  
+- **YieldDistributed**: Yield allocation breakdown  
+- **LossApplied**: Loss distribution across tranches  
+- **SimulatedYield**: Simulated yield event  
+- **SimulatedLoss**: Simulated loss event  
+
+---
+
+## ❗ Error Codes
+
+- **InvalidAmount**: Zero or invalid input  
+- **Unauthorized**: Caller not vault authority  
+- **MathOverflow**: Arithmetic overflow  
+- **ZeroShares**: Would mint 0 shares (dust input)  
+- **CapExceeded**: Exceeds Senior yield cap  
+
+---
+
+## 🔐 Security Features
+
+- ✅ Safe arithmetic (no unchecked overflows)  
+- ✅ PDA-based account derivation  
+- ✅ Admin functions gated by authority pubkey  
+- ✅ Position updates require owner signature  
+- ✅ Protection against zero-value actions  
+
+___
+
 
